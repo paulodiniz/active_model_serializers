@@ -9,7 +9,7 @@ module ActiveModelSerializers
     attr_reader :attributes
 
     def initialize(attributes = {})
-      @attributes = attributes
+      @attributes = ActiveSupport::HashWithIndifferentAccess.new attributes
       super
     end
 
@@ -29,7 +29,7 @@ module ActiveModelSerializers
     end
 
     def read_attribute_for_serialization(key)
-      if key == :id || key == 'id'
+      if key == :id
         attributes.fetch(key) { id }
       else
         attributes[key]

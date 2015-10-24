@@ -28,6 +28,9 @@ module ActiveModelSerializers
       attributes.fetch(:updated_at) { File.mtime(__FILE__) }
     end
 
+    # Fetches the key from the attributes hash
+    # Defaults to :id if key is not present
+    # @param key [Symbol, String] Attribute key
     def read_attribute_for_serialization(key)
       if key == :id
         attributes.fetch(key) { id }
